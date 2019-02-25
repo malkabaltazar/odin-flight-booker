@@ -1,0 +1,44 @@
+<h1>Flights</h1>
+
+<%= form_for :flight, url: flights_path, method: :get do |f| %>
+
+  <%= f.label :from_airport %>
+  <%= f.select(:from_airport, @from_airports) %>
+
+  <%= f.label :to_airport %>
+  <%= f.select(:to_airport, @to_airports) %><br>
+
+  <%= f.label :passengers %>
+  <%= f.select(:passengers, @passengers) %>
+
+  <%= f.label :date %>
+  <%= f.select(:date, @dates) %><br>
+
+  <%= f.submit "Search" %>
+<% end %>
+
+<% if @results.present? %>
+  <%= form_for :booking, url: new_booking_path, method: :get do |f| %>
+    <table>
+      <thead>
+      </thead>
+        <th>From:</th>
+        <th>To:</th>
+        <th>Departure:</th>
+        <th>Duration:</th>
+      <tbody>
+        <% @results.each do |flight| %>
+        <tr>
+          <td><%= flight.from_airport.airport %></td>
+          <td><%= flight.to_airport.airport %></td>
+          <td><%= flight.start.strftime("%A, %b %d %Y %l:%M %p") %></td>
+          <td><%= flight.duration %> minutes</td>
+          <td><%= radio_button_tag(:flight, flight.id) %> Book</td>
+        </tr>
+        <% end %>
+      </tbody>
+    <table>
+    <%= hidden_field_tag :passenger_count, @count %>
+    <%= f.submit "On to booking!" %>
+  <% end %>
+<% end %>

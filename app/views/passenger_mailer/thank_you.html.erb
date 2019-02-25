@@ -1,0 +1,9 @@
+<h1>Flight information</h1>
+
+<p>Hi <%= @booking.passengers.first.name %>,</p>
+
+<p>
+Thank you for your business.
+</p>
+
+<%= link_to "Flight information", booking_url(@booking) %>

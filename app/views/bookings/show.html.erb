@@ -1,0 +1,13 @@
+<h1>Booked flight</h1>
+
+Departure: <%= @booking.flight.start.strftime("%A, %b %d %Y %l:%M %p") %>
+Duration: <%= @booking.flight.duration %> minutes<br>
+From: <%= @booking.flight.from_airport.airport %>
+To: <%= @booking.flight.to_airport.airport %>
+ID: <%= @booking.flight.id %><br><br>
+
+Passengers:<br>
+<% @booking.passengers.each do |passenger| %>
+  Name: <%= passenger.name %>
+  Email: <%= passenger.email %><br>
+<% end %>
